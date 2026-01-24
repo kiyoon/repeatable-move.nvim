@@ -87,10 +87,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     next_err, prev_err = repeat_move.make_repeatable_move_pair(next_err, prev_err)
 
     local opts = { buffer = args.buf }
-    vim.keymap.set({ "n", "x", "o" }, "[w", prev_warn, vim.tbl_extend("force", opts, { desc = "Previous warning" }))
     vim.keymap.set({ "n", "x", "o" }, "]w", next_warn, vim.tbl_extend("force", opts, { desc = "Next warning" }))
-    vim.keymap.set({ "n", "x", "o" }, "[e", prev_err, vim.tbl_extend("force", opts, { desc = "Previous error" }))
+    vim.keymap.set({ "n", "x", "o" }, "[w", prev_warn, vim.tbl_extend("force", opts, { desc = "Previous warning" }))
     vim.keymap.set({ "n", "x", "o" }, "]e", next_err, vim.tbl_extend("force", opts, { desc = "Next error" }))
+    vim.keymap.set({ "n", "x", "o" }, "[e", prev_err, vim.tbl_extend("force", opts, { desc = "Previous error" }))
   end,
 })
 ```
@@ -127,8 +127,8 @@ Example: [aeriel.nvim](https://github.com/stevearc/aerial.nvim)
         local repeat_move = require("repeatable_move")
         -- make sure forward function comes first
         anext, aprev = repeat_move.make_repeatable_move_pair(aerial.next, aerial.prev)
-        vim.keymap.set("n", "[r", aprev, { buffer = bufnr, desc = "Aerial prev" })
         vim.keymap.set("n", "]r", anext, { buffer = bufnr, desc = "Aerial next" })
+        vim.keymap.set("n", "[r", aprev, { buffer = bufnr, desc = "Aerial prev" })
       end,
     })
   end,
