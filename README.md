@@ -22,6 +22,29 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ## Usage
 
+Step 1: follow nvim-treesitter-textobjects for setting up keybinds for `;`, `,`, `f`, `t`, `F`, `T`.
+
+```lua
+local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
+
+-- Repeat movement with ; and ,
+-- ensure ; goes forward and , goes backward regardless of the last direction
+vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
+vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
+
+-- vim way: ; goes to the direction you were moving.
+-- vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+-- vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+
+-- Optionally, make builtin f, F, t, T also repeatable with ; and ,
+vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
+```
+
+Step 2: Use this plugin for registering your custom movements.
+
 - Use `make_repeatable_move_pair` function to create a pair of repeatable move functions for next and previous movements.  
 - Use `make_repeatable_move` function to create a single repeatable move function.
 - Use `set_last_move` function to manually set the last move function if needed.
