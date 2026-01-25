@@ -95,6 +95,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 ```
 
+Example: vim built-in keybindings like cnext/cprev (`]q`/`[q`)
+
+```lua
+local function qf_next()
+  vim.cmd("cnext " .. vim.v.count1)
+end
+
+local function qf_prev()
+  vim.cmd("cprev " .. vim.v.count1)
+end
+
+local repeat_move = require("repeatable_move")
+local qf_next_repeat, qf_prev_repeat = repeat_move.make_repeatable_move_pair(qf_next, qf_prev)
+vim.keymap.set("n", "]q", qf_next_repeat, { desc = "Next quickfix item" })
+vim.keymap.set("n", "[q", qf_prev_repeat, { desc = "Previous quickfix item" })
+```
+
 Example: [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)
 
 ```lua
