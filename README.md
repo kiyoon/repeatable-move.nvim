@@ -25,7 +25,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 Step 1: follow nvim-treesitter-textobjects for setting up keybinds for `;`, `,`, `f`, `t`, `F`, `T`.
 
 ```lua
-local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
+local ts_repeat_move = require "nvim-treesitter-textobjects.repeatable_move"
 
 -- Repeat movement with ; and ,
 -- ensure ; goes forward and , goes backward regardless of the last direction
